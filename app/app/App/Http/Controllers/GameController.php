@@ -55,6 +55,7 @@ class GameController extends Controller
             if(
                 $sequence->getSpace( 0 ) === $sequence->getSpace( 1 ) &&
                 $sequence->getSpace( 0 ) === $sequence->getSpace( 2 ) &&
+                $sequence->getSpace( 0 ) === $sequence->getSpace( 3 ) &&
                 $sequence->getSpace( 0 ) !== GameMark::None
             ) return true;
         }
@@ -80,6 +81,7 @@ class GameController extends Controller
             if(
                 $sequence->getSpace( 0 ) === $sequence->getSpace( 1 ) &&
                 $sequence->getSpace( 0 ) === $sequence->getSpace( 2 ) &&
+                $sequence->getSpace( 0 ) === $sequence->getSpace( 3 ) &&
                 $sequence->getSpace( 0 ) !== GameMark::None
             ) return true;
         }
@@ -104,12 +106,14 @@ class GameController extends Controller
         if (    // Check the main diagonal
             $game->getMainDiagonal(0)->getSpace( 0 ) === $game->getMainDiagonal(0)->getSpace( 1 ) &&
             $game->getMainDiagonal(0)->getSpace( 0 ) === $game->getMainDiagonal(0)->getSpace( 2 ) &&
+            $game->getMainDiagonal(0)->getSpace( 0 ) === $game->getMainDiagonal(0)->getSpace( 3 ) &&
             $game->getMainDiagonal(0)->getSpace( 0 ) !== GameMark::None
         ) return true;
 
         if (    // Check the anti-diagonal
             $game->getAntiDiagonal(0)->getSpace( 0 ) === $game->getAntiDiagonal(0)->getSpace( 1 ) &&
             $game->getAntiDiagonal(0)->getSpace( 0 ) === $game->getAntiDiagonal(0)->getSpace( 2 ) &&
+            $game->getAntiDiagonal(0)->getSpace( 0 ) === $game->getAntiDiagonal(0)->getSpace( 3 ) &&
             $game->getAntiDiagonal(0)->getSpace( 0 ) !== GameMark::None
         ) return true;
 
@@ -180,7 +184,7 @@ class GameController extends Controller
 
         // Check if the given position is actually valid; can't have the player draw a cross on the table next to the
         // game board ;)
-        if ($x < 0 || $x > 2 || $y < 0 || $y > 2)
+        if ($x < 0 || $x > 3 || $y < 0 || $y > 3)
             return response("Position outside of the game board")->setStatusCode(422)->header('Content-Type', 'text/plain');
 
         // Prevent the player from playing if the game has already ended
