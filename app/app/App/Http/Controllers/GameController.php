@@ -108,7 +108,7 @@ class GameController extends Controller
         // This function needs to return null if nobody has won yet - you can use someoneHasWon( $game ) for this.
         // If someone has won, it needs to return either GamePlayer::Human or GamePlayer::Robot.
         // =============================================================================================================
-
+        
         return null;
     }
 
@@ -131,8 +131,13 @@ class GameController extends Controller
         // GamePlayer::Human (the last move was made by the player) or GamePlayer::None (this is the first move).
         // Inside of $player you have the player which wants to play now.
         // If he is allowed to play, you have to return true, otherwise you have to return false.
+        $lastPlayer = $game->getLastPlayer();
+            
+            if ($lastPlayer === $player){
 
-        return true;
+                return false;
+            }
+        return true;    
     }
 
     /**
